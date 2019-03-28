@@ -1,5 +1,0 @@
-PACKAGE (VERSION) UNRELEASED; urgency=medium
-
-  * Initial release. (Closes: #XXXXXX)
-
- -- NVIDIA System Management <dgxbaseossupport@nvidia.com>  Mon, 18 Mar 2019 14:57:37 -0700

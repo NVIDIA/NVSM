@@ -1,6 +1,0 @@
-273/nvsm/v1/Systems/1/GPUs
-273/redfish/v1/Systems/1/Memory
-273/nvsm/v1/Systems/1/Pcie/Errors
-273/redfish/v1/Chassis/1/Power
-273/redfish/v1/Systems/1/Storage
-273/redfish/v1/Chassis/1/Thermal

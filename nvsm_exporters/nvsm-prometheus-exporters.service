@@ -1,0 +1,13 @@
+[Unit]
+Description= NVSM exporter for Prometheus
+StartLimitIntervalSec=300
+After=nvsm-apis.service
+
+[Service]
+ExecStart=/usr/sbin/nvsm_prometheus_exporters
+Restart=on-failure
+StartLimitBurst=10
+
+[Install]
+WantedBy=multi-user.target
+

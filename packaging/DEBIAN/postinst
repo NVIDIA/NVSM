@@ -1,0 +1,24 @@
+#!/bin/bash
+
+case "$1" in
+    configure)
+
+        #Request systemd to reload the unit files afresh
+        systemctl daemon-reload
+
+        #Set NVSM APIs to automatically start on system boot
+        systemctl enable nvsm-prometheus-exporters
+
+        #Restart NVSM APIs if a previous instance was running already
+        systemctl restart nvsm-prometheus-exporters
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+

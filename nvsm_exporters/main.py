@@ -9,14 +9,19 @@
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
 
 import importlib
-import json
 import os
 import urllib3
-import subprocess
 import time
 import sys
-import traceback
 import yaml
+import alerts_exporter
+import gpu_exporter
+import memory_exporter
+import pcie_exporter
+import processor_exporter
+import storage_exporter
+import thermal_exporter
+import power_exporter
 
 from prometheus_client import start_http_server
 
@@ -26,13 +31,15 @@ modules = []
 prometheus_port = 8000
 prometheus_exporters = []
 exporters_interval = 20
+DefaultConfigDir = "/etc/nvsm-apis/"
+DefaultConfigFile = "nvsm-prometheus-exporters.config"
+DefaultConfigFilePath = DefaultConfigDir + DefaultConfigFile
 
-
-if not os.path.exists("config.yml"):
-    sys.exit("config.yml does not exist")
+if not os.path.exists(DefaultConfigFilePath):
+    sys.exit("Config file does not exist")
 
 try:
-    with open("config.yml") as ymlfile:
+    with open(DefaultConfigFilePath) as ymlfile:
         configyml = yaml.load(ymlfile)
 except:
     sys.exit("Error in config file")
@@ -60,7 +67,6 @@ while(True):
             sys.exit(1)
         except Exception as e:
             print e
-            traceback.print_exc()
             print "Failed"
             continue
     time.sleep(exporters_interval)
