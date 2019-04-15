@@ -135,6 +135,7 @@ def ExportMetric(ip="localhost", port="273"):
             metric_map["fan_status"] = status
         c.set(temp)
 
+    # Set values to metrics
     temp_health_metric = metric_map[temp_health]
     fan_health_metric = metric_map[fan_health]
     

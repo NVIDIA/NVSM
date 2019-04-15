@@ -71,6 +71,7 @@ def ExportMetric(ip="localhost", port="273"):
     # Read data returned by URL
     data = r.json()
     
+    # Set values to metrics
     correctable_metric = metric_map[correctable]
     uncorrectable_metric = metric_map[uncorrectable]
     

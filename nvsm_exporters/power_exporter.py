@@ -84,10 +84,14 @@ def ExportMetric(ip="localhost", port="273"):
     
     # Iterate over the PowerSupplies collection to get the PowerSupply information
     for powersupply in data['PowerSupplies']:
+
+        # Create new metrics for each power supply
         name = powersupply["Name"] 
         if name not in metric_map:
             metric_map[name] = Gauge(name, "Power Consumption")
         c = metric_map[name]
+
+        # Set value to each metric 
         if(powersupply["LastPowerOutputWatts"] == "na"):
             c.set(0)
         else:
@@ -108,8 +112,11 @@ def ExportMetric(ip="localhost", port="273"):
             status = 0 
         elif status < temp:
             status = temp
+
+        # Set value to metric
         metric_map["status"] = status
         
+        # Create metric for each power supply
         name = powersupply["Name"] + "_Health"
         if name not in metric_map:
             metric_map[name] = Gauge(name, "PSU Health")
@@ -118,6 +125,7 @@ def ExportMetric(ip="localhost", port="273"):
 
         power_usage += int(powersupply["LastPowerOutputWatts"])
     
+    # Set data to metrics
     status = metric_map["status"]
     system_power_metric = metric_map[system_power_consumption]
     health_metric = metric_map[psu_health]

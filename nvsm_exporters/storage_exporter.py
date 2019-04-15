@@ -171,6 +171,7 @@ def ExportMetric(ip="localhost", port= "273"):
                 status = temp
                 metric_map["status"] =  status
     
+    # Set values to metrics
     status = metric_map["status"]
     health_metric = metric_map[health]
     health_metric.set(status)
