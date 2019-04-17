@@ -1,0 +1,9 @@
+Package: nvsm-prometheus-exporters
+Version: @PACKAGE_VERSION@
+Maintainer: DGX Software Support <dgx-sw-support@nvidia.com>
+Description: NVIDIA System Management exporters for Prometheus
+Architecture: all
+Section: multiverse
+Priority: optional
+Standards-Version: 4.0.0
+Depends: python-prometheus-client, python-requests, nvsm-apis

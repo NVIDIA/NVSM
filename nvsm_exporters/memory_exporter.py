@@ -73,18 +73,25 @@ def ExportMetric(ip="localhost", port="273"):
     global metric_map
     dimms = 0
     
+    # Read JWT token for NVSM-APIs
     with open ('/etc/nvsm-apis/nvsm-apis-perpetual.jwt', 'r') as jwt_file:
         tokenstring = jwt_file.read()
 
+    # Request to URL to get the data
     r = requests.get('https://' + str(ip) + ':' + str(port) + '/redfish/v1/Systems/1/Memory', timeout=5, verify=False, headers={'Authorization': 'Bearer '+tokenstring})
-        
+
+    # Read data returned by URL    
     data = r.json()
 
     correctable_total = 0
     uncorrectable_total = 0
 
     for data_id,val in enumerate(data["Members"]):
+
+        # Request to URL to get the data
         r = requests.get('https://' + str(ip) + ':' + str(port) + val["@odata.id"], timeout=5, verify=False, headers={'Authorization': 'Bearer '+tokenstring})
+
+        # Read data returned by URL
         data_cpu = r.json()
 
         dimms += 1
@@ -109,7 +116,8 @@ def ExportMetric(ip="localhost", port="273"):
             status = 1
 
         health_metric.set(status)
-
+    
+    # Set values to metrics
     correctable_metric = metric_map[correctable]
     uncorrectable_metric = metric_map[uncorrectable]
     count_metric = metric_map[dimm_count]

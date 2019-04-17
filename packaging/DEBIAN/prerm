@@ -1,0 +1,4 @@
+#!/bin/sh
+
+systemctl stop nvsm-prometheus-exporters
+systemctl disable nvsm-prometheus-exporters

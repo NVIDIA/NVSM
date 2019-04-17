@@ -88,7 +88,8 @@ def ExportMetric(ip="localhost", port="273"):
         core_count += proc_data["TotalCores"]
         thread_count += proc_data["TotalThreads"]
         cpu_count += 1
-        
+
+    # Set values to metrics
     coreCount_metric = metric_map[coreCount]
     threadCount_metric = metric_map[threadCount]
     cpuCount_metric = metric_map[cpuCount]
